@@ -1,0 +1,15 @@
+  # Versão do Anaconda em container executar o comando para entrar no container - docker exec -it Anaconda /bin/bash
+  # e gerar uma senha com o comando jupyter notebook list. acesssar o servidor Jupyter com http://<DOCKER-MACHONE-IP>:8888
+  anaconda:
+    image: 'continuumio/anaconda3'
+    container_name: Anaconda
+    restart: 'unless-stopped'
+    volumes:
+      - '/containers/notebooks:/opt/notebooks'
+    ports:
+      - "8888:8888"
+    command:
+      /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='0.0.0.0' --port=8888 --no-browser --allow-root
+    tty: 'true'
+    network_mode: host
+    privileged: 'true'
